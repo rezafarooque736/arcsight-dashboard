@@ -2,7 +2,7 @@ import { LayoutDashboard, Option } from "lucide-react";
 
 export const sideBarContent = [
   {
-    title: "Dashboard",
+    title: "Web Application Security",
     href: "/",
     icon: LayoutDashboard,
     variant: "default",

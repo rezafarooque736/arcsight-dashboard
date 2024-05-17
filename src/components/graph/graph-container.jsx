@@ -16,6 +16,16 @@ export const GraphContainer = ({ dashboardData, id }) => {
     return acc;
   }, []);
 
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     window.location.reload();
+  //   }, 3000); // 300000 milliseconds = 5 minutes
+
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // });
+
   return (
     <Card>
       <CardHeader className="py-0 pl-1">
