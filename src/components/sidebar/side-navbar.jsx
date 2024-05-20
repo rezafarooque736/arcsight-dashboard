@@ -5,10 +5,18 @@ import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { sideBarContent } from "@/data/constants";
 import { Nav } from "./nav";
+import Cookies from "js-cookie";
 
 export default function SideNavbar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const toggle = () => setIsCollapsed(!isCollapsed);
+  const isSidebarOpen = Cookies.get("isSidebarOpen")
+    ? Cookies.get("isSidebarOpen")
+    : Cookies.set("isSidebarOpen", false, { secure: true });
+
+  const [isCollapsed, setIsCollapsed] = useState(isSidebarOpen);
+  const toggle = () => {
+    setIsCollapsed(!isCollapsed);
+    Cookies.set("isSidebarOpen", !isCollapsed, { secure: true });
+  };
 
   return (
     <div className="relative w-auto px-2 border-r-2">
