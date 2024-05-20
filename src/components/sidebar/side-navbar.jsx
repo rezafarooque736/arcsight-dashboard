@@ -24,7 +24,7 @@ export default function SideNavbar() {
       <Button
         size={"icon"}
         variant={"outline"}
-        className="absolute top-1/2 right-[-20px] rounded-full"
+        className="absolute top-1/2 right-[-20px] rounded-full size-7 bg-slate-100 border border-slate-200"
         onClick={toggle}
       >
         {isCollapsed ? (
