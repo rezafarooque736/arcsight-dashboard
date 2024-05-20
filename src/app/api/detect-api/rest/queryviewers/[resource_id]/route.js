@@ -1,8 +1,8 @@
-import { generateArcsightToken } from "@/utils/generate-arcsight-token";
 import { NextResponse } from "next/server";
 
 import https from "https";
 import fetch from "node-fetch";
+import { generateArcsightToken } from "@/data/api";
 
 export const dynamic = "force-dynamic";
 
