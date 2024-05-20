@@ -4,25 +4,19 @@ import React from "react";
 // import custom components
 import PageTitle from "@/components/page-title";
 import GraphContainer from "@/components/graph/graph-container";
-import {
-  getBlockedPoliciesOfLast24h,
-  getActionAlertedOfLast24h,
-  getAllPolicyStatusOfLast24h,
-} from "@/actions";
 import { convertToLocalDateTime } from "@/utils/convert-to-local-date-time";
-import { dashboard1 } from "@/data/dashboard1";
-import { dashboard2 } from "@/data/dashboard2";
-import { dashboard3 } from "@/data/dashboard3";
-
-export const dynamic = "force-dynamic";
+import { getQueryViewerData } from "@/data/api";
 
 const Home = async () => {
-  // const blockedPoliciesOfLast24h = await getBlockedPoliciesOfLast24h();
-  const blockedPoliciesOfLast24h = dashboard1;
-  // const actionAlertedOfLast24h = await getActionAlertedOfLast24h();
-  const actionAlertedOfLast24h = dashboard2;
-  // const allPolicyStatusOfLast24h = await getAllPolicyStatusOfLast24h();
-  const allPolicyStatusOfLast24h = dashboard3;
+  const blockedPoliciesOfLast24h = await getQueryViewerData(
+    process.env.RESOURCE_ID_BLOCKED_POLICIES_OF_LAST_24H
+  );
+  const actionAlertedOfLast24h = await getQueryViewerData(
+    process.env.RESOURCE_ID_ACTION_ALERTED_OF_LAST_24H
+  );
+  const allPolicyStatusOfLast24h = await getQueryViewerData(
+    process.env.RESOURCE_ID_ALL_POLICY_STATUS_OF_LAST_24H
+  );
 
   return (
     <div className="flex flex-col w-full h-full gap-2">
