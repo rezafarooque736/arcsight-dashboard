@@ -1,9 +1,9 @@
 export const getQueryViewerData = async (resource_id) => {
   try {
     const res = await fetch(
-      `${process.env.WEB_URL}/api/detect-api/rest/queryviewers/${resource_id}`,
+      `http://localhost:8000/api/v1/dashboard/detect-api/rest/queryviewers/${resource_id}`,
       {
-        cache: "no-store",
+        next: { revalidate: 300 },
       }
     );
 
@@ -13,29 +13,14 @@ export const getQueryViewerData = async (resource_id) => {
       );
     }
 
-    return res.json();
+    const data = await res.json();
+
+    return data.data;
   } catch (error) {
     console.log(error);
     return (
       "Error while getting data from backend /api/detect-api/rest/queryviewers",
       error
     );
-  }
-};
-
-export const generateArcsightToken = async () => {
-  try {
-    const res = await fetch(`${process.env.WEB_URL}/api/arcsight-token`, {
-      next: { revalidate: 1800 },
-    });
-
-    if (!res.ok) {
-      throw new Error("Error while getting data from /api/arcsight-token");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log(error);
-    return "Error while getting data from backend /api/arcsight-token", error;
   }
 };
