@@ -19,10 +19,16 @@ export function Nav({ links, isCollapsed }) {
     <TooltipProvider>
       <div
         data-collapsed={isCollapsed}
-        className="group flex flex-col gap-1 py-2 data-[collapsed=true]:py-2 items-center"
+        className="group flex flex-col gap-2 py-2 data-[collapsed=true]:py-2 items-center"
       >
-        <Image src={"railtel_logo.svg"} alt="RailTel" width={36} height={36} />
-        <nav className="grid gap-1">
+        <Image
+          src={"railtel_logo.svg"}
+          alt="RailTel"
+          width={36}
+          height={60}
+          className="rounded-full h-[60px] w-9"
+        />
+        <nav className="grid gap-2">
           {links.map((link) =>
             isCollapsed ? (
               <Tooltip key={link.title} delayDuration={0}>
