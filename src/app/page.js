@@ -1,5 +1,5 @@
 // import shadcn ui components library
-import React from "react";
+import React, { Suspense } from "react";
 
 // import custom components
 import PageTitle from "@/components/page-title";
@@ -19,14 +19,14 @@ const Home = async () => {
   );
 
   return (
-    <div className="flex flex-col w-full h-full gap-2">
+    <div className="flex flex-col w-full h-full">
       {/* page title */}
       <div className="flex items-center justify-between">
         <PageTitle title="Web Application Security Dashboard" />
         <p className="font-serif text-base">
           Data last refreshed :{" "}
           <span className="text-sm text-gray-700">
-            {convertToLocalDateTime(blockedPoliciesOfLast24h.data.timestamp)}
+            {new Date().toLocaleString()}
           </span>
         </p>
       </div>
@@ -34,11 +34,36 @@ const Home = async () => {
       {/* graph */}
       <section className="grid w-full h-full grid-cols-1 gap-2 transition-all lg:grid-cols-2">
         <div className="grid grid-rows-2 gap-2">
-          <GraphContainer dashboardData={blockedPoliciesOfLast24h} id={1} />
-          <GraphContainer dashboardData={actionAlertedOfLast24h} id={2} />
+          <Suspense
+            fallback={<div className="grid place-items-center">Loading...</div>}
+          >
+            <GraphContainer
+              dashboardData={blockedPoliciesOfLast24h}
+              id={1}
+              indexAxis="y"
+            />
+          </Suspense>
+
+          <Suspense
+            fallback={<div className="grid place-items-center">Loading...</div>}
+          >
+            <GraphContainer
+              dashboardData={actionAlertedOfLast24h}
+              id={2}
+              indexAxis="y"
+            />
+          </Suspense>
         </div>
         <div>
-          <GraphContainer dashboardData={allPolicyStatusOfLast24h} id={3} />
+          <Suspense
+            fallback={<div className="grid place-items-center">Loading...</div>}
+          >
+            <GraphContainer
+              dashboardData={allPolicyStatusOfLast24h}
+              id={3}
+              indexAxis="x"
+            />
+          </Suspense>
         </div>
       </section>
     </div>
