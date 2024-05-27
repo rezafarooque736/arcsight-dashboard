@@ -2,8 +2,9 @@
 
 import { useRef, useEffect } from "react";
 import { Chart } from "chart.js/auto";
+import { cn } from "@/lib/utils";
 
-const BarGraph = ({ graphData, graphLabel, id }) => {
+const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -64,16 +65,28 @@ const BarGraph = ({ graphData, graphLabel, id }) => {
             },
           },
           responsive: true,
-          indexAxis: "y",
+          indexAxis: indexAxis,
           scales: {
             x: {
-              // type: "category",
-              position: "top",
-              // labels: ["a", "b", "c", "d"],
+              // position: indexAxis === "y" ? "top" : "bottom",
+              ticks: {
+                color: "black", // X-axis label color
+                font: {
+                  weight: "lighter",
+                },
+              },
+              stacked: true,
             },
             y: {
               beginAtZero: true,
-              display: false,
+              // display: indexAxis === "y" ? false : true,
+              ticks: {
+                color: "black", // Y-axis label color
+                font: {
+                  weight: "lighter",
+                },
+              },
+              stacked: true,
             },
           },
         },
@@ -86,11 +99,14 @@ const BarGraph = ({ graphData, graphLabel, id }) => {
         chartInstance.destroy();
       }
     };
-  }, [graphData, graphLabel, id]);
+  }, [graphData, graphLabel, id, indexAxis]);
 
   return (
     <div className="relative w-full">
-      <canvas id={`myChart-${id}`} className="max-h-full"></canvas>
+      <canvas
+        id={`myChart-${id}`}
+        className={cn(indexAxis === "y" ? "max-h-full" : "min-h-full mt-4")}
+      ></canvas>
     </div>
   );
 };

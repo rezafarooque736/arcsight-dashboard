@@ -7,24 +7,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const GraphDescription = ({ columnHeaders, rows }) => {
+const GraphDescription = ({ graphDesc }) => {
   return (
     <Table className="my-2 w-[300px] text-sm">
       <TableHeader>
         <TableRow>
-          <TableHead className="p-0 h-auto text-black text-xs">
-            {columnHeaders[0]}
+          <TableHead className="h-auto p-0 text-xs text-black">
+            Policy Name
           </TableHead>
-          <TableHead className="text-right p-0 h-auto text-black text-xs">
-            {columnHeaders[1]} ({rows.length})
+          <TableHead className="h-auto p-0 text-xs text-right text-black">
+            Total Events ({graphDesc?.length})
           </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="text-slate-900 text-xs">
-        {rows.map((row, index) => (
-          <TableRow key={index}>
-            <TableCell className="p-0">{row.value[0]}</TableCell>
-            <TableCell className="text-right p-0">{row.value[1]}</TableCell>
+      <TableBody className="text-xs text-slate-900">
+        {graphDesc.map((row, index) => (
+          <TableRow key={index} className="border-none">
+            <TableCell className="p-0">{row.policy}</TableCell>
+            <TableCell className="p-0 text-right">{row.total}</TableCell>
           </TableRow>
         ))}
       </TableBody>
