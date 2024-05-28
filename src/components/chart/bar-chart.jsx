@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import { cn } from "@/lib/utils";
 
-const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
+const BarChart = ({ chartData, chartLabel, id }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -20,10 +20,10 @@ const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
       chartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: graphLabel,
+          labels: chartLabel,
           datasets: [
             {
-              data: graphData,
+              data: chartData,
               backgroundColor: [
                 "rgba(134,25,413, 0.4)",
                 "rgba(6,95,70, 0.4)",
@@ -52,9 +52,7 @@ const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
               ],
               borderWidth: 1,
               borderRadius: 9,
-              minBarLength: 3,
-              // categoryPercentage: 1,
-              // barPercentage: 0.9,
+              // minBarLength: 3,
             },
           ],
         },
@@ -65,28 +63,23 @@ const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
             },
           },
           responsive: true,
-          indexAxis: indexAxis,
           scales: {
             x: {
-              // position: indexAxis === "y" ? "top" : "bottom",
               ticks: {
                 color: "black", // X-axis label color
                 font: {
                   weight: "lighter",
                 },
               },
-              stacked: true,
             },
             y: {
               beginAtZero: true,
-              // display: indexAxis === "y" ? false : true,
               ticks: {
                 color: "black", // Y-axis label color
                 font: {
                   weight: "lighter",
                 },
               },
-              stacked: true,
             },
           },
         },
@@ -99,16 +92,13 @@ const BarGraph = ({ graphData, graphLabel, id, indexAxis }) => {
         chartInstance.destroy();
       }
     };
-  }, [graphData, graphLabel, id, indexAxis]);
+  }, [chartData, chartLabel, id]);
 
   return (
     <div className="relative w-full">
-      <canvas
-        id={`myChart-${id}`}
-        className={cn(indexAxis === "y" ? "max-h-full" : "min-h-full mt-4")}
-      ></canvas>
+      <canvas id={`myChart-${id}`}></canvas>
     </div>
   );
 };
 
-export default BarGraph;
+export default BarChart;
