@@ -1,9 +1,10 @@
 "use client";
 
 import { LineChart } from "@tremor/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const LineChartContainer = ({ data, categories }) => {
+const LineChartContainer = ({ data, categories, colors }) => {
   const dataFormatter = (number) =>
     `${Intl.NumberFormat("en-IN").format(number).toString()}`;
   return (
@@ -12,7 +13,7 @@ const LineChartContainer = ({ data, categories }) => {
         data={data}
         index="policy"
         categories={categories}
-        colors={["green"]}
+        colors={colors}
         className="h-72"
         yAxisWidth={83}
         valueFormatter={dataFormatter}

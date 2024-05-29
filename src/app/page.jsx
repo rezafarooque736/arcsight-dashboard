@@ -48,6 +48,7 @@ const Home = async () => {
             <LineChartContainer
               data={allPolicyStatusOfLast24h?.passed}
               categories={["passedCurr"]}
+              colors={["green"]}
             />
           </Suspense>
           <RadialGradient origin="bottom left" from="#dcfce7" size={100} />
@@ -63,9 +64,10 @@ const Home = async () => {
             <LineChartContainer
               data={allPolicyStatusOfLast24h?.alerted}
               categories={["alertedCurr"]}
+              colors={["yellow"]}
             />
           </Suspense>
-          <RadialGradient origin="bottom left" from="#dcfce7" size={100} />
+          <RadialGradient origin="bottom left" from="#fef9c3" size={100} />
         </div>
 
         {/* Blocked chart */}
@@ -78,9 +80,10 @@ const Home = async () => {
             <LineChartContainer
               data={allPolicyStatusOfLast24h?.blocked}
               categories={["blockedCurr"]}
+              colors={["red"]}
             />
           </Suspense>
-          <RadialGradient origin="bottom left" from="#dcfce7" size={100} />
+          <RadialGradient origin="bottom left" from="#fee2e2" size={100} />
         </div>
       </section>
 
