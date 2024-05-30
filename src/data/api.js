@@ -1,7 +1,7 @@
-export const getQueryViewerData = async (resource_id) => {
+export const getQueryViewerData = async () => {
   try {
     const res = await fetch(
-      `http://localhost:8000/api/v1/dashboard/detect-api/rest/queryviewers/${resource_id}`,
+      `http://localhost:8000/api/v1/dashboard/detect-api/rest/queryviewers`,
       {
         next: { revalidate: 300 }, //time in seconds to revalidate cache
       }
