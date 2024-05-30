@@ -12,9 +12,7 @@ import AreaChartContainer from "@/components/chart/area-chart-container";
 import { Separator } from "@/components/ui/separator";
 
 const Home = async () => {
-  const allPolicyStatusOfLast24h = await getQueryViewerData(
-    process.env.RESOURCE_ID_ALL_POLICY_STATUS_OF_LAST_24H
-  );
+  const allPolicyStatusOfLast24h = await getQueryViewerData();
 
   return (
     <div className="flex flex-col w-full max-h-full gap-2 overflow-x-hidden">
