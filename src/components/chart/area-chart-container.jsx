@@ -1,15 +1,23 @@
 "use client";
 
-import { LineChart } from "@tremor/react";
+import { AreaChart } from "@tremor/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
-const LineChartContainer = ({ data, categories, colors }) => {
+const AreaChartContainer = ({ data, categories, colors }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    let intervalId = setInterval(() => router.refresh(), 300_000); //300 seconds
+
+    return () => clearInterval(intervalId);
+  }, [router]);
+
   const dataFormatter = (number) =>
     `${Intl.NumberFormat("en-IN").format(number).toString()}`;
   return (
     <div>
-      <LineChart
+      <AreaChart
         data={data}
         index="policy"
         categories={categories}
@@ -27,4 +35,4 @@ const LineChartContainer = ({ data, categories, colors }) => {
   );
 };
 
-export default LineChartContainer;
+export default AreaChartContainer;

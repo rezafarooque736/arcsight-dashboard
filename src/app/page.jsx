@@ -8,7 +8,7 @@ import ChartDescription from "@/components/chart/chart-description";
 import PageSubtitle from "@/components/page-subtitle";
 import RadialGradient from "@/components/magicui/radial-gradient";
 import Loading from "./loading";
-import LineChartContainer from "@/components/chart/line-chart-container";
+import AreaChartContainer from "@/components/chart/area-chart-container";
 import { Separator } from "@/components/ui/separator";
 
 const Home = async () => {
@@ -24,14 +24,15 @@ const Home = async () => {
         <p className="font-serif text-base">
           Data last refreshed :{" "}
           <span className="text-sm text-gray-700">
-            {new Date().toLocaleString()}
+            {allPolicyStatusOfLast24h?.timestamp || new Date().toLocaleString()}
           </span>
         </p>
       </div>
 
       {/* page subtitle */}
       <PageSubtitle
-        subTitle={"All Policy Status the Last 24 Hours"}
+        subTitle={"Traffic Insights"}
+        subTitleSmall={"(last 24hrs & Comparison with weekly average)"}
         startTime={allPolicyStatusOfLast24h?.startTimestamp}
         endTime={allPolicyStatusOfLast24h?.endTimestamp}
       />
@@ -45,10 +46,10 @@ const Home = async () => {
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
           <Suspense fallback={<Loading />}>
-            <LineChartContainer
+            <AreaChartContainer
               data={allPolicyStatusOfLast24h?.passed}
-              categories={["passedCurr"]}
-              colors={["green"]}
+              categories={["passed_avg", "passed_curr"]}
+              colors={["fuchsia", "green"]}
             />
           </Suspense>
           <RadialGradient origin="bottom left" from="#dcfce7" size={100} />
@@ -61,10 +62,10 @@ const Home = async () => {
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
           <Suspense fallback={<Loading />}>
-            <LineChartContainer
+            <AreaChartContainer
               data={allPolicyStatusOfLast24h?.alerted}
-              categories={["alertedCurr"]}
-              colors={["yellow"]}
+              categories={["alerted_avg", "alerted_curr"]}
+              colors={["sky", "yellow"]}
             />
           </Suspense>
           <RadialGradient origin="bottom left" from="#fef9c3" size={100} />
@@ -77,10 +78,10 @@ const Home = async () => {
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
           <Suspense fallback={<Loading />}>
-            <LineChartContainer
+            <AreaChartContainer
               data={allPolicyStatusOfLast24h?.blocked}
-              categories={["blockedCurr"]}
-              colors={["red"]}
+              categories={["blocked_avg", "blocked_curr"]}
+              colors={["stone", "red"]}
             />
           </Suspense>
           <RadialGradient origin="bottom left" from="#fee2e2" size={100} />

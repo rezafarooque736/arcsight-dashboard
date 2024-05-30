@@ -3,7 +3,7 @@ export const getQueryViewerData = async (resource_id) => {
     const res = await fetch(
       `http://localhost:8000/api/v1/dashboard/detect-api/rest/queryviewers/${resource_id}`,
       {
-        next: { revalidate: 300000 },
+        next: { revalidate: 300 }, //time in seconds to revalidate cache
       }
     );
 

@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
-import { convertToLocalDateTime } from "@/utils/convert-to-local-date-time";
 import React from "react";
 
 export default function PageSubtitle({
   subTitle,
+  subTitleSmall,
   startTime,
   endTime,
   className,
@@ -11,14 +11,16 @@ export default function PageSubtitle({
   return (
     <div
       className={cn(
-        "flex flex-row items-center justify-center text-sm text-slate-900",
+        "flex flex-col items-center justify-center text-sm text-slate-900",
         className
       )}
     >
-      <div className="mr-1 font-medium">{subTitle}</div>
+      <div className="flex items-center mr-1 font-medium underline">
+        {subTitle}
+        <p className="ml-1 text-xs">{subTitleSmall}</p>
+      </div>
       <div className="font-mono text-xs font-light">
-        ({convertToLocalDateTime(startTime)} - {convertToLocalDateTime(endTime)}
-        )
+        ({startTime} - {endTime})
       </div>
     </div>
   );
