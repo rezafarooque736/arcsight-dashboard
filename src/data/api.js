@@ -1,7 +1,7 @@
 export const getQueryViewerData = async () => {
   try {
     const res = await fetch(
-      `http://localhost:8000/api/v1/dashboard/detect-api/rest/queryviewers`,
+      `http://localhost:8000/api/v1/dashboard/arcsight/detect-api/rest/queryviewers`,
       {
         next: { revalidate: 300 }, //time in seconds to revalidate cache
       }
