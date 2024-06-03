@@ -29,21 +29,21 @@ const ChartDescription = ({ chartDesc }) => {
               </TableHead>
 
               <TableHead className="flex items-center h-auto gap-1 py-1 text-xs text-green-950">
-                Passed (7 Days)
+                Passed (7 Days Avg)
               </TableHead>
               <TableHead className="h-auto py-1 text-xs text-green-950">
                 Passed (24 Hrs)
               </TableHead>
 
               <TableHead className="flex items-center h-auto gap-1 py-1 text-xs text-yellow-950">
-                Alerted (7 Days)
+                Alerted (7 Days Avg)
               </TableHead>
               <TableHead className="h-auto py-1 text-xs text-yellow-950">
                 Alerted (24 Hrs)
               </TableHead>
 
               <TableHead className="flex items-center h-auto gap-1 py-1 text-xs text-red-950">
-                Blocked (7 Days)
+                Blocked (7 Days Avg)
               </TableHead>
               <TableHead className="h-auto py-1 text-xs text-red-950">
                 Blocked (24 Hrs)
