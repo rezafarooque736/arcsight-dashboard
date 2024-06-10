@@ -1,4 +1,4 @@
-import { LayoutDashboard, Option } from "lucide-react";
+import { LayoutDashboard, Option, Ticket } from "lucide-react";
 
 export const sideBarContent = [
   {
@@ -8,9 +8,9 @@ export const sideBarContent = [
     variant: "default",
   },
   {
-    title: "Options1",
-    href: "/option1",
-    icon: Option,
+    title: "HPSM Ticketing Tool",
+    href: "/hpsm-dashboard",
+    icon: Ticket,
     variant: "ghost",
   },
   {

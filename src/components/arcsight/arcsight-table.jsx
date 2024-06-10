@@ -16,7 +16,7 @@ import {
 } from "../ui/tooltip";
 import { Triangle } from "lucide-react";
 
-const ChartDescription = ({ chartDesc }) => {
+export default function ArcsightTable({ chartDesc }) {
   return (
     <div className="w-full h-full overflow-auto border border-gray-400 rounded-lg">
       <div className="relative h-auto p-1 overflow-hidden rounded-lg">
@@ -170,6 +170,4 @@ const ChartDescription = ({ chartDesc }) => {
       </div>
     </div>
   );
-};
-
-export default ChartDescription;
+}

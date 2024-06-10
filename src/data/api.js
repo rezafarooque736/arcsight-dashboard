@@ -24,3 +24,22 @@ export const getQueryViewerData = async () => {
     );
   }
 };
+
+export const getHPSMTicketingToolData = async () => {
+  try {
+    const res = await fetch(`http://localhost:8000/api/v1/dashboard/hpsm`, {
+      next: { revalidate: 0 }, //time in seconds to revalidate cache
+    });
+
+    if (!res.ok) {
+      throw new Error("Error while getting data from /hpsm");
+    }
+
+    const data = await res.json();
+
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return "Error while getting data from backend /hpsm", error;
+  }
+};

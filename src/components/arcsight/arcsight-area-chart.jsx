@@ -4,7 +4,7 @@ import { AreaChart } from "@tremor/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-const AreaChartContainer = ({ data, categories, colors }) => {
+export default function ArcsightAreaChart({ data, categories, colors }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -33,6 +33,4 @@ const AreaChartContainer = ({ data, categories, colors }) => {
       />
     </div>
   );
-};
-
-export default AreaChartContainer;
+}
