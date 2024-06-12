@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { sideBarContent } from "@/data/constants";
+import { sideBarContent } from "@/data";
 import { Nav } from "./nav";
 
 export default function SideNavbar() {
@@ -13,7 +13,7 @@ export default function SideNavbar() {
   };
 
   return (
-    <div className="relative w-auto h-screen px-2 border-r-2 border-gray-400">
+    <div className="sticky top-0 bottom-0 right-0 w-auto h-screen px-2 border-r-2 border-gray-400">
       {/* icon to increase and decrease the sidebar */}
       {isCollapsed ? (
         <ChevronRight

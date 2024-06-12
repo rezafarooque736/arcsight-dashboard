@@ -13,9 +13,9 @@ export const getQueryViewerData = async () => {
       );
     }
 
-    const data = await res.json();
+    const { data } = await res.json();
 
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return (
@@ -35,9 +35,9 @@ export const getHPSMTicketingToolData = async () => {
       throw new Error("Error while getting data from /hpsm");
     }
 
-    const data = await res.json();
+    const { data } = await res.json();
 
-    return data.data;
+    return data;
   } catch (error) {
     console.log(error);
     return "Error while getting data from backend /hpsm", error;

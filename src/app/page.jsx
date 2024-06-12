@@ -15,7 +15,7 @@ const Home = async () => {
   const allPolicyStatusOfLast24h = await getQueryViewerData();
 
   return (
-    <div className="flex flex-col w-full max-h-full gap-3 overflow-x-hidden">
+    <div className="flex flex-col w-full gap-3">
       {/* page title */}
       <div className="flex items-center justify-between -mb-2">
         <PageTitle title="Web Application Security Dashboard" />

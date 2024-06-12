@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       <body
         className={cn(
           inter.className,
-          "max-h-screen w-full flex bg-white text-black antialiased dark:bg-gray-950"
+          "w-full min-h-screen flex bg-white text-black antialiased dark:bg-gray-950"
         )}
       >
         {/* sidebar */}

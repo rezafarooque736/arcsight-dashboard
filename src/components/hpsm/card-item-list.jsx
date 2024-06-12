@@ -25,6 +25,8 @@ export default function CardItemList({ oldestOpenTicketSize10 }) {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Incident Id - {ticket.IncidentID}</p>
+                  <p>OpenedBy - {ticket.OpenedBy}</p>
+                  <p>Assignee - {ticket.Assignee}</p>
                   <p>Title - {ticket.Title}</p>
                 </TooltipContent>
               </Tooltip>
