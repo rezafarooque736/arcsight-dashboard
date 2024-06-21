@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import { Suspense } from "react";
 import { Separator } from "../ui/separator";
-import Loading from "@/app/loading";
 import { BarChart } from "@tremor/react";
 import { useRouter } from "next/navigation";
+import LoadingComponent from "../loading-component";
 
 export default function HPSMAreaChart({ countsBySubService }) {
   const subServiceArray = Object.entries(countsBySubService).map(
@@ -13,7 +13,7 @@ export default function HPSMAreaChart({ countsBySubService }) {
   const router = useRouter();
 
   useEffect(() => {
-    let intervalId = setInterval(() => router.refresh(), 300000); //300 seconds, 5 minutes, time in milliseconds
+    let intervalId = setInterval(() => router.refresh(), 300_000); //300 seconds, 5 minutes, time in milliseconds
 
     return () => clearInterval(intervalId);
   }, [router]);
@@ -27,7 +27,7 @@ export default function HPSMAreaChart({ countsBySubService }) {
         Services Counts
       </span>
       <Separator className="absolute top-8 bg-slate-300" />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<LoadingComponent />}>
         <BarChart
           data={subServiceArray}
           index="subservice"

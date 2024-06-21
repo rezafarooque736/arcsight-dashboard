@@ -6,23 +6,25 @@ import PageTitle from "@/components/page-title";
 import { getQueryViewerData } from "@/data/api";
 import PageSubtitle from "@/components/page-subtitle";
 import RadialGradient from "@/components/magicui/radial-gradient";
-import Loading from "./loading";
 import { Separator } from "@/components/ui/separator";
 import ArcsightAreaChart from "@/components/arcsight/arcsight-area-chart";
 import ArcsightTable from "@/components/arcsight/arcsight-table";
+import LoadingComponent from "@/components/loading-component";
 
 const Home = async () => {
-  const allPolicyStatusOfLast24h = await getQueryViewerData();
+  const allPolicyStatusOfLast24h = await getQueryViewerData(
+    "web-application-security"
+  );
 
   return (
     <div className="flex flex-col w-full gap-3">
       {/* page title */}
       <div className="flex items-center justify-between -mb-2">
         <PageTitle title="Web Application Security Dashboard" />
-        <p className="font-serif text-base">
-          Data last refreshed :{" "}
+        <p className="font-mono text-base">
+          Last refreshed :{" "}
           <span className="text-sm text-gray-700">
-            {allPolicyStatusOfLast24h?.timestamp || new Date().toLocaleString()}
+            {new Date().toLocaleString()}
           </span>
         </p>
       </div>
@@ -43,7 +45,7 @@ const Home = async () => {
             Passed
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingComponent title="Passed" />}>
             <ArcsightAreaChart
               data={allPolicyStatusOfLast24h?.passed}
               categories={["passed_avg", "passed_curr"]}
@@ -59,7 +61,7 @@ const Home = async () => {
             Alerted
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingComponent title="Alerted" />}>
             <ArcsightAreaChart
               data={allPolicyStatusOfLast24h?.alerted}
               categories={["alerted_avg", "alerted_curr"]}
@@ -75,7 +77,7 @@ const Home = async () => {
             Blocked
           </span>
           <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingComponent title="Blocked" />}>
             <ArcsightAreaChart
               data={allPolicyStatusOfLast24h?.blocked}
               categories={["blocked_avg", "blocked_curr"]}

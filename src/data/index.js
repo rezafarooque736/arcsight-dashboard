@@ -1,22 +1,22 @@
-import { LayoutDashboard, Option, Ticket } from "lucide-react";
+import { GlobeLockIcon, LayoutDashboardIcon, TicketIcon } from "lucide-react";
 
 export const sideBarContent = [
   {
     title: "Web Application Security",
     href: "/",
-    icon: LayoutDashboard,
+    icon: LayoutDashboardIcon,
     variant: "default",
   },
   {
-    title: "HPSM Ticketing Tool",
-    href: "/hpsm-dashboard",
-    icon: Ticket,
+    title: "Suspicious AddressList",
+    href: "/suspicious-address-list",
+    icon: GlobeLockIcon,
     variant: "ghost",
   },
   {
-    title: "Options2",
-    href: "/option2",
-    icon: Option,
+    title: "HPSM Ticketing Tool",
+    href: "/hpsm-ticketing-tool",
+    icon: TicketIcon,
     variant: "ghost",
   },
 ];

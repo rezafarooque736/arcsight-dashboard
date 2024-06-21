@@ -1,10 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import CardTitleCustom from "../card-title-custom";
-import Loading from "@/app/loading";
 import { BarList } from "@tremor/react";
+import LoadingComponent from "../loading-component";
 
 export default function AssigneeDetails({ assigneeDetails }) {
-  if (!assigneeDetails) return <Loading />;
+  if (!assigneeDetails) return <LoadingComponent />;
 
   const assigneeData = Object.entries(assigneeDetails).map(([name, value]) => ({
     name,

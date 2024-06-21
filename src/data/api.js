@@ -1,9 +1,9 @@
-export const getQueryViewerData = async () => {
+export const getQueryViewerData = async (endpoint) => {
   try {
     const res = await fetch(
-      `http://localhost:8000/api/v1/dashboard/arcsight/detect-api/rest/queryviewers`,
+      `http://localhost:8000/api/v1/dashboard/arcsight/detect-api/rest/queryviewers/${endpoint}`,
       {
-        next: { revalidate: 0 }, //time in seconds to revalidate cache
+        next: { revalidate: 300 }, //time in seconds to revalidate cache
       }
     );
 
@@ -28,7 +28,7 @@ export const getQueryViewerData = async () => {
 export const getHPSMTicketingToolData = async () => {
   try {
     const res = await fetch(`http://localhost:8000/api/v1/dashboard/hpsm`, {
-      next: { revalidate: 0 }, //time in seconds to revalidate cache
+      next: { revalidate: 300 }, //time in seconds to revalidate cache
     });
 
     if (!res.ok) {

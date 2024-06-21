@@ -8,7 +8,7 @@ export default function ArcsightAreaChart({ data, categories, colors }) {
   const router = useRouter();
 
   useEffect(() => {
-    let intervalId = setInterval(() => router.refresh(), 300000); //300 seconds, 5 minutes, time in milliseconds
+    let intervalId = setInterval(() => router.refresh(), 300_000); //300 seconds, 5 minutes, time in milliseconds
 
     return () => clearInterval(intervalId);
   }, [router]);

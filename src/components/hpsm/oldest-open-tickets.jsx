@@ -1,10 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 import CardItemList from "./card-item-list";
 import CardTitleCustom from "@/components/card-title-custom";
-import Loading from "@/app/loading";
+import LoadingComponent from "../loading-component";
 
 export default function OldestOpenTickets({ oldestOpenTicketSize10 }) {
-  if (!oldestOpenTicketSize10) return <Loading />;
+  if (!oldestOpenTicketSize10) return <LoadingComponent />;
 
   return (
     <div className="w-full max-h-full p-2 mx-auto overflow-hidden">
