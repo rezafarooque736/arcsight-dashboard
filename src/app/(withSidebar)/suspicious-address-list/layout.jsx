@@ -1,3 +1,9 @@
+import { getSession } from "@/utils/get-session";
+
+export const metadata = {
+  title: "Suspicious Address List | Dashboard",
+  description: "Suspicious Address List Dashboard",
+};
 export default function SuspiciousAddressListLayout({
   children,
   paloAlto,
@@ -5,6 +11,7 @@ export default function SuspiciousAddressListLayout({
   vpnF5Bigip,
   deviceProduct,
 }) {
+  getSession();
   return (
     <section className="flex flex-col w-full h-[calc(100vh-50px)] gap-2">
       {children}

@@ -1,8 +1,17 @@
+import { cookies } from "next/headers";
+
 export const getQueryViewerData = async (endpoint) => {
   try {
+    const cookieStore = cookies();
+
+    const { value: accessToken } = cookieStore.get("accessToken");
     const res = await fetch(
       `http://localhost:8000/api/v1/dashboard/arcsight/detect-api/rest/queryviewers/${endpoint}`,
       {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
         next: { revalidate: 300 }, //time in seconds to revalidate cache
       }
     );
@@ -27,7 +36,15 @@ export const getQueryViewerData = async (endpoint) => {
 
 export const getHPSMTicketingToolData = async () => {
   try {
+    const cookieStore = cookies();
+
+    const { value: accessToken } = cookieStore.get("accessToken");
+
     const res = await fetch(`http://localhost:8000/api/v1/dashboard/hpsm`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       next: { revalidate: 300 }, //time in seconds to revalidate cache
     });
 

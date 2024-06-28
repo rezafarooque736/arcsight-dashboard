@@ -13,7 +13,7 @@ export default function SideNavbar() {
   };
 
   return (
-    <div className="sticky top-0 bottom-0 right-0 z-50 w-auto h-screen px-2 border-r-2 border-gray-400 cursor-pointer">
+    <div className="fixed top-0 bottom-0 left-0 z-50 w-auto h-[calc(100vh-12px)] px-1 border-r-2 border-gray-400">
       {/* icon to increase and decrease the sidebar */}
       {isCollapsed ? (
         <ChevronRight

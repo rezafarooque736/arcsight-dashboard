@@ -9,46 +9,49 @@ import {
 } from "@/components/ui/table";
 import { getQueryViewerData } from "@/data/api";
 
-export default async function DeviceProductDefault() {
-  const { ipStatusCountList: data } = await getQueryViewerData(
-    "device-product"
-  );
+export default async function PaloAltoDefault() {
+  const data = await getQueryViewerData("palo-alto");
 
   return (
     <div className="w-full h-full overflow-auto">
-      <CardTitleCustom
-        title="Device Product"
-        className={"text-base text-center border-b-2 border-slate-300"}
-      />
+      <div className="flex items-center justify-between px-3 py-1 border-b-2 border-slate-300">
+        <CardTitleCustom
+          title="Palo Alto"
+          // title={data.name}
+          className={"text-sm text-center"}
+        />
+        <span className="font-mono text-xs text-gray-800">
+          {data.startTimestamp} - {data.endTimestamp}
+        </span>
+      </div>
+
       <Table className="w-full text-sm">
         <TableHeader>
           <TableRow>
-            <TableHead className="h-auto py-1 text-xs text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-slate-800">
               IP
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
               Status
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
               Count
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-right text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-right text-slate-800">
               Product
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-xs">
-          {data.map((row) => (
+          {data?.ipStatusCountList.map((row) => (
             <TableRow key={row.ip}>
               <TableCell className="py-1">{row.ip}</TableCell>
               <TableCell className="py-1 text-center">{row.status}</TableCell>
               <TableCell className="py-1 text-center">{row.count}</TableCell>
-              <TableCell className="py-1 text-right">
-                {row.device_product}
-              </TableCell>
+              <TableCell className="py-1 text-right">xxxxxxxx</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -6,8 +6,8 @@ export default function Default() {
       {/* page title */}
       <div className="flex items-center justify-between px-1 -mb-1">
         <PageTitle title="Suspicious Address List (On All Devices)" />
-        <p className="font-serif text-base">
-          Data last refreshed :{" "}
+        <p className="font-mono text-base">
+          Last refreshed :{" "}
           <span className="text-sm text-gray-700">
             {new Date().toLocaleString()}
           </span>

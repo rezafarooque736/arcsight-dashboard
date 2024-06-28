@@ -1,97 +1,134 @@
-// import shadcn ui components library
-import React, { Suspense } from "react";
+"use client";
 
-// import custom components
-import PageTitle from "@/components/page-title";
-import { getQueryViewerData } from "@/data/api";
-import PageSubtitle from "@/components/page-subtitle";
-import RadialGradient from "@/components/magicui/radial-gradient";
-import { Separator } from "@/components/ui/separator";
-import ArcsightAreaChart from "@/components/arcsight/arcsight-area-chart";
-import ArcsightTable from "@/components/arcsight/arcsight-table";
-import LoadingComponent from "@/components/loading-component";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { SignInFormSchema } from "@/schema";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { toast } from "sonner";
 
-const Home = async () => {
-  const allPolicyStatusOfLast24h = await getQueryViewerData(
-    "web-application-security"
-  );
+export default function SignInForm() {
+  const [errorFromBackend, setErrorFromBackend] = useState("");
+  const router = useRouter();
+  const callbackUrl = "/web-application-security";
+  const form = useForm({
+    resolver: zodResolver(SignInFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  useEffect(() => {
+    const accessTokenLocal = localStorage.getItem("accessToken");
+    if (accessTokenLocal) {
+      router.push("/web-application-security");
+    } else {
+      router.push("/");
+    }
+  }, []);
+
+  const onSubmit = async (values) => {
+    const { email, password } = values;
+    const response = await fetch("http://localhost:8000/api/v1/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const {
+        data: { accessToken, refreshToken },
+      } = await response.json();
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      router.push(callbackUrl);
+    } else {
+      const { message } = await response.json();
+      setErrorFromBackend(message);
+      toast.error(message);
+    }
+  };
 
   return (
-    <div className="flex flex-col w-full gap-3">
-      {/* page title */}
-      <div className="flex items-center justify-between -mb-2">
-        <PageTitle title="Web Application Security Dashboard" />
-        <p className="font-mono text-base">
-          Last refreshed :{" "}
-          <span className="text-sm text-gray-700">
-            {new Date().toLocaleString()}
-          </span>
-        </p>
+    <div className="grid w-screen h-screen place-content-center">
+      <div className="flex flex-col gap-2 p-8 m-2 space-y-4 border rounded-md bg-slate-100 border-slate-300 w-96 ring-1">
+        <div className="flex justify-center">
+          <Image
+            src={"railtel_logo.svg"}
+            alt="RailTel"
+            width={50}
+            height={64}
+            className="w-[50] h-16 rounded-full"
+          />
+        </div>
+        <h1 className="text-2xl font-semibold">Log in to Dashboard</h1>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+            <div className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="mail@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Password</FormLabel>
+                    </div>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage>{errorFromBackend}</FormMessage>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button
+              className="w-full mt-6 hover:bg-primary-hover"
+              type="submit"
+            >
+              Login
+            </Button>
+          </form>
+        </Form>
+        {/* <Button
+          asChild
+          variant={"link"}
+          className="self-end px-0 pl-1 font-medium text-sky-600 w-min"
+        >
+          <Link href={"/auth/forgot-password"}>Forgot your password?</Link>
+        </Button> */}
       </div>
-
-      {/* page subtitle */}
-      <PageSubtitle
-        subTitle={"Traffic Insights"}
-        subTitleSmall={"(last 24hrs & Comparison with weekly average)"}
-        startTime={allPolicyStatusOfLast24h?.startTimestamp}
-        endTime={allPolicyStatusOfLast24h?.endTimestamp}
-      />
-
-      {/* chart */}
-      <section className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {/* Passed chart */}
-        <div className="relative pr-3 border border-t-4 border-gray-400 rounded-lg border-t-green-500 bg-background">
-          <span className="absolute leading-tight top-2 left-2 text-slate-700">
-            Passed
-          </span>
-          <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<LoadingComponent title="Passed" />}>
-            <ArcsightAreaChart
-              data={allPolicyStatusOfLast24h?.passed}
-              categories={["passed_avg", "passed_curr"]}
-              colors={["fuchsia", "green"]}
-            />
-          </Suspense>
-          <RadialGradient origin="bottom left" from="#dcfce7" size={75} />
-        </div>
-
-        {/* Alerted chart */}
-        <div className="relative pr-3 border border-t-4 border-gray-400 rounded-lg border-t-yellow-500 bg-background">
-          <span className="absolute leading-tight top-2 left-2 text-slate-700">
-            Alerted
-          </span>
-          <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<LoadingComponent title="Alerted" />}>
-            <ArcsightAreaChart
-              data={allPolicyStatusOfLast24h?.alerted}
-              categories={["alerted_avg", "alerted_curr"]}
-              colors={["sky", "yellow"]}
-            />
-          </Suspense>
-          <RadialGradient origin="bottom left" from="#fef9c3" size={75} />
-        </div>
-
-        {/* Blocked chart */}
-        <div className="relative pr-3 border border-t-4 border-gray-400 rounded-lg border-t-red-500 bg-background">
-          <span className="absolute leading-tight top-2 left-2 text-slate-700">
-            Blocked
-          </span>
-          <Separator className="absolute top-7 bg-slate-400" />
-          <Suspense fallback={<LoadingComponent title="Blocked" />}>
-            <ArcsightAreaChart
-              data={allPolicyStatusOfLast24h?.blocked}
-              categories={["blocked_avg", "blocked_curr"]}
-              colors={["stone", "red"]}
-            />
-          </Suspense>
-          <RadialGradient origin="bottom left" from="#fee2e2" size={75} />
-        </div>
-      </section>
-
-      {/* chart description */}
-      <ArcsightTable chartDesc={allPolicyStatusOfLast24h?.chartDesc} />
     </div>
   );
-};
-
-export default Home;
+}

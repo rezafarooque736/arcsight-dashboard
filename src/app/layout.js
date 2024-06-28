@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import SideNavbar from "@/components/sidebar/side-navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +16,12 @@ export default function RootLayout({ children }) {
       <body
         className={cn(
           inter.className,
-          "w-full min-h-screen flex bg-white text-black antialiased dark:bg-gray-950"
+          "w-screen min-h-screen bg-white text-black antialiased dark:bg-gray-950"
         )}
       >
-        {/* sidebar */}
-        <SideNavbar />
-
         {/* main page */}
-        <div className="w-full px-3 pb-3">{children}</div>
+        <main className="w-full h-full">{children}</main>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

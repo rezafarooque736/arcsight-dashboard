@@ -7,7 +7,7 @@ export default function SuspiciousAddressListHomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    const intervalId = setInterval(() => router.refresh(), 600_000); //time in millisecond, 1_000 ms = 1 second
+    const intervalId = setInterval(() => router.refresh(), 300_000); //time in millisecond, 1_000 ms = 1 second
     return () => clearInterval(intervalId);
   }, [router]);
 
@@ -16,8 +16,8 @@ export default function SuspiciousAddressListHomePage() {
       {/* page title */}
       <div className="flex items-center justify-between px-1 -mb-1">
         <PageTitle title="Suspicious Address List (On All Devices)" />
-        <p className="font-serif text-base">
-          Data last refreshed :{" "}
+        <p className="font-mono text-base">
+          Last refreshed :{" "}
           <span className="text-sm text-gray-700">
             {new Date().toLocaleString()}
           </span>

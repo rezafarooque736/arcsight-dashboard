@@ -9,31 +9,33 @@ import {
 } from "@/components/ui/table";
 import { getQueryViewerData } from "@/data/api";
 
-export default async function PaloAltoPage() {
-  const { ipStatusCountList: data } = await getQueryViewerData("palo-alto");
+export default async function DeviceProductDefault() {
+  const { ipStatusCountList: data } = await getQueryViewerData(
+    "device-product"
+  );
+
   return (
     <div className="w-full h-full overflow-auto">
       <CardTitleCustom
-        title="Palo Alto"
+        title="Device Product"
         className={"text-base text-center border-b-2 border-slate-300"}
       />
-
       <Table className="w-full text-sm">
         <TableHeader>
           <TableRow>
-            <TableHead className="h-auto py-1 text-xs text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-slate-800">
               IP
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
               Status
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
               Count
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-right text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-right text-slate-800">
               Product
             </TableHead>
           </TableRow>
@@ -44,7 +46,9 @@ export default async function PaloAltoPage() {
               <TableCell className="py-1">{row.ip}</TableCell>
               <TableCell className="py-1 text-center">{row.status}</TableCell>
               <TableCell className="py-1 text-center">{row.count}</TableCell>
-              <TableCell className="py-1 text-right">xxxxxxxx</TableCell>
+              <TableCell className="py-1 text-right">
+                {row.device_product}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

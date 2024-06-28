@@ -9,38 +9,44 @@ import {
 } from "@/components/ui/table";
 import { getQueryViewerData } from "@/data/api";
 
-export default async function VPNF5BigIPPage() {
-  const { ipStatusCountList: data } = await getQueryViewerData("vpn-f5-bigIP");
+export default async function VPNF5BigIPDefault() {
+  const data = await getQueryViewerData("vpn-f5-bigIP");
 
   return (
     <div className="w-full h-full overflow-auto">
-      <CardTitleCustom
-        title="VPN F5 Big IP"
-        className={"text-base text-center border-b-2 border-slate-300"}
-      />
+      <div className="flex items-center justify-between px-3 py-1 border-b-2 border-slate-300">
+        <CardTitleCustom
+          title="VPN F5 Big IP"
+          // title={data.name}
+          className={"text-sm text-center"}
+        />
+        <span className="font-mono text-xs text-gray-800">
+          {data.startTimestamp} - {data.endTimestamp}
+        </span>
+      </div>
 
       <Table className="w-full text-sm">
         <TableHeader>
           <TableRow>
-            <TableHead className="h-auto py-1 text-xs text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-slate-800">
               IP
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
-              Hash
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
+              Session ID
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-center text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-center text-slate-800">
               Count
             </TableHead>
 
-            <TableHead className="h-auto py-1 text-xs text-right text-slate-900">
+            <TableHead className="h-auto py-1 text-xs font-semibold text-right text-slate-800">
               Product
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-xs">
-          {data.map((row) => (
+          {data?.ipStatusCountList.map((row) => (
             <TableRow key={row.ip}>
               <TableCell className="py-1">{row.ip}</TableCell>
               <TableCell className="py-1 text-center">{row.string4}</TableCell>

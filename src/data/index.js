@@ -3,7 +3,7 @@ import { GlobeLockIcon, LayoutDashboardIcon, TicketIcon } from "lucide-react";
 export const sideBarContent = [
   {
     title: "Web Application Security",
-    href: "/",
+    href: "/web-application-security",
     icon: LayoutDashboardIcon,
     variant: "default",
   },

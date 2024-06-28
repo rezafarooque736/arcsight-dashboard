@@ -5,6 +5,7 @@ import PageTitle from "@/components/page-title";
 import { getHPSMTicketingToolData } from "@/data/api";
 import HPSMAreaChart from "@/components/hpsm/hpsm-area-chart";
 import DataTableContainer from "@/components/hpsm/data-table-container";
+import { getSession } from "@/utils/get-session";
 
 export const metadata = {
   title: "HPSM | Dashboard",
@@ -12,8 +13,12 @@ export const metadata = {
 };
 
 export default async function HpsmHomePage() {
-  // Fetch the HPSM data
-  const hpsmData = await getHPSMTicketingToolData();
+  let hpsmData;
+  const session = getSession();
+  if (session) {
+    // Fetch the HPSM data
+    hpsmData = await getHPSMTicketingToolData();
+  }
 
   return (
     <div className="flex flex-col w-full h-full gap-2">
